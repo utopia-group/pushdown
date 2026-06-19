@@ -1,0 +1,11 @@
+D = (int,)
+I: (int,) = (0,)
+A1 = fold(D, I,
+    lambda a, r: (
+        a[0] + 1 if r[0] == 0 or r[0] == 1 else a[0],))
+A = filter(A1,
+    lambda a:
+        a[0] > 0 and
+        not (a[0] >= 5 and a[0] < 10) and
+        (a[0] <= 50 or
+         a[0] > 63))

@@ -1,0 +1,50 @@
+(lang dune 3.13)
+
+(name pusharoot)
+
+(using menhir 2.1)
+
+(generate_opam_files true)
+
+(source
+ (github username/reponame))
+
+(authors "Author Name")
+
+(maintainers "Maintainer Name")
+
+(license LICENSE)
+
+(documentation https://url/to/documentation)
+
+(package
+ (name pusharoot)
+ (synopsis "A short synopsis")
+ (description "A longer description")
+ (depends
+  (ocaml
+   (= "4.14.1"))
+  (dune
+   (= "3.19.1"))
+  (menhir
+   (= "20240715"))
+  (core
+   (= "v0.16.2"))
+  (core_unix
+   (= "v0.16.0"))
+  (batteries
+   (= "3.9.0"))
+  (ke
+   (= "0.6"))
+  (re
+   (= "1.13.2"))
+  (ppx_deriving
+   (= "v5.2.1"))
+  (ppx_jane
+   (= "v0.16.0"))
+  (ppx_variants_conv
+   (= "v0.16.0")))
+ (tags
+  (topics "to describe" your project)))
+
+; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project

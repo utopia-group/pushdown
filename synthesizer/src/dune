@@ -1,0 +1,65 @@
+; (env
+;  (dev
+;   (env-vars
+;    (CPPO_FLAGS "")))
+;  (no-bounds
+;   (env-vars
+;    (CPPO_FLAGS "-D NO_BOUNDS")))
+;  (spacer
+;   (env-vars
+;    (CPPO_FLAGS "-D SPACER"))))
+
+; (rule
+;  (deps
+;   (:< synth.ml))
+;  (targets synth_opt.ml)
+;  (action
+;   (with-stdout-to
+;    %{targets}
+;    (system "%{bin:cppo} %{env:CPPO_FLAGS=} %{<}"))))
+
+(library
+ (name pusharoot)
+ (public_name pusharoot)
+ (preprocess
+  (pps ppx_deriving.show ppx_jane ppx_variants_conv))
+ (modules
+  lexer
+  parser
+  ast
+  pass_reduce
+  pass_gc
+  pass_cfa
+  pass_monos
+  pass_encode
+  extract
+  synth
+  solver
+  utils
+  smtlib_utils
+  exns)
+ (libraries core core_unix batteries ke re))
+
+(ocamllex
+ (modules lexer))
+
+(menhir
+ (modules parser))
+
+(executable
+ (name pusharoo)
+ (modules pusharoo)
+ (libraries pusharoot)
+ (promote
+  (until-clean)
+  (only pusharoo.exe)
+  (into ..)))
+
+(executable
+ (name ablcomp)
+ (modules ablcomp)
+ (libraries pusharoot)
+ (promote
+  (until-clean)
+  (only ablcomp.exe)
+  (into ..)))
